@@ -1,0 +1,179 @@
+import { Component } from '@angular/core';
+import { NavController, AlertController, ToastController, PopoverController, ModalController } from 'ionic-angular';
+
+import {SettingsPage} from '../settings/settings';
+import {RestaurantListPage} from '../restaurant-list/restaurant-list';
+import {RestaurantService} from '../../providers/restaurant-service-mock';
+import {RestaurantDetailPage} from '../restaurant-detail/restaurant-detail';
+import {RestaurantFilterPage} from '../restaurant-filter/restaurant-filter';
+import {NotificationsPage} from '../notifications/notifications';
+import {NearbyPage} from '../nearby/nearby';
+import {CategoryPage} from '../category/category';
+import {OrdersPage} from '../orders/orders';
+import {CartPage} from '../cart/cart';
+
+@Component({
+  selector: 'page-home',
+  templateUrl: 'home.html'
+})
+
+export class HomePage {
+
+  restaurants: Array<any>;
+  searchKey: string = "";
+  yourLocation: string = "";
+
+  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, public locationCtrl: AlertController, public modalCtrl: ModalController, public toastCtrl: ToastController, public service: RestaurantService) {
+		this.findAll();
+  }
+
+  ionViewDidLoad() {
+    if (localStorage.getItem('currentLocation') == null){
+      document.getElementById('restaurants').style.display='none';
+      this.setLocation();
+    }
+  }
+
+  ionViewWillEnter() {
+    this.navCtrl.canSwipeBack();
+    if (localStorage.getItem('seatLocation') == null){
+      this.yourLocation = 'Not Set';
+    } else {
+      this.yourLocation = localStorage.getItem('seatLocation');
+    }
+  }
+
+  openRestaurantListPage(proptype) {
+  	this.navCtrl.push(RestaurantListPage, proptype);
+  }
+
+  openRestaurantFilterPage() {
+    let modal = this.modalCtrl.create(RestaurantFilterPage);
+    modal.present();
+  }
+
+  openNearbyPage() {
+    this.navCtrl.push(NearbyPage);
+  }
+
+  openOrders() {
+    this.navCtrl.push(OrdersPage);
+  }
+
+  openCart() {
+    this.navCtrl.push(CartPage);
+  }
+
+	openRestaurantDetail(restaurant: any) {
+	    this.navCtrl.push(RestaurantDetailPage, restaurant);
+	}
+
+  openSettingsPage() {
+  	this.navCtrl.push(SettingsPage);
+  }
+
+  openNotificationsPage() {
+  	this.navCtrl.push(NotificationsPage);
+  }
+
+  openCategoryPage() {
+    this.navCtrl.push(CategoryPage);
+  }
+
+	onInput(event) {
+	    this.service.findByName(this.searchKey)
+	        .then(data => {
+	            this.restaurants = data;
+	        })
+	        .catch(error => alert(JSON.stringify(error)));
+	}
+
+	onCancel(event) {
+	    this.findAll();
+	}
+
+	findAll() {
+	    this.service.findAll()
+	        .then(data => this.restaurants = data)
+	        .catch(error => alert(error));
+  }
+  
+  setLocation() {
+    let setLocation = this.locationCtrl.create({
+      title: 'Set Location',
+      message: "It appears you're at AT&T Stadium. Is this correct?",
+      buttons: [
+        {
+          text: 'No',
+          handler: data => {
+            console.log('No clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: data => {
+            console.log('Change clicked', data);
+            localStorage.setItem('currentLocation','AT&T Stadium');
+            document.getElementById('restaurants').style.display='block';
+            let toast = this.toastCtrl.create({
+              message: 'Concessions for AT&T Stadium now available.',
+              duration: 3000,
+              position: 'top',
+              closeButtonText: 'OK',
+              showCloseButton: true
+            });
+            toast.present();
+          }
+        }
+      ]
+    });
+    setLocation.present();
+  }
+
+  alertLocation() {
+    let changeLocation = this.locationCtrl.create({
+      title: 'Change Location',
+      message: "Type your seat and section number you want your food delivered to.",
+      inputs: [
+        {
+          name: 'location',
+          placeholder: 'Enter your seat Location',
+          type: 'text'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Done',
+          handler: data => {
+            console.log('Change clicked', data);
+            localStorage.setItem('seatLocation', data.location);
+            this.yourLocation = data.location;
+            let toast = this.toastCtrl.create({
+              message: 'Seat was successfully updated.',
+              duration: 3000,
+              position: 'top',
+              closeButtonText: 'OK',
+              showCloseButton: true
+            });
+            toast.present();
+          }
+        }
+      ]
+    });
+    changeLocation.present();
+  }
+
+  presentNotifications(myEvent) {
+    console.log(myEvent);
+    let popover = this.popoverCtrl.create(NotificationsPage);
+    popover.present({
+      ev: myEvent
+    });
+  }
+}

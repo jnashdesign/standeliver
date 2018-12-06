@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Category</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+	<div class="card-background-page">
+
+	  <ion-card *ngFor="let category of categories" tappable (click)="openRestaurantListPage(category.name)">
+	    <img [src]="category.picture" />
+	    <div class="card-title">{{category.name}}</div>
+	    <div class="card-subtitle">{{category.quantity}} Restaurants</div>
+	  </ion-card>
+
+	</div>
+
+</ion-content>
