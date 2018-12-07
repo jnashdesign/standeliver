@@ -23,23 +23,30 @@ export class HomePage {
   searchKey: string = "";
   yourLocation: string = "";
 
-  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, public locationCtrl: AlertController, public modalCtrl: ModalController, public toastCtrl: ToastController, public service: RestaurantService) {
+  constructor(
+    public navCtrl: NavController, 
+    public popoverCtrl: PopoverController, 
+    public locationCtrl: AlertController, 
+    public modalCtrl: ModalController, 
+    public toastCtrl: ToastController, 
+    public service: RestaurantService) {
 		this.findAll();
   }
 
   ionViewDidLoad() {
-    if (localStorage.getItem('currentLocation') == null){
+    if (sessionStorage.getItem('currentLocation') == null){
       document.getElementById('restaurants').style.display='none';
+      document.getElementById('stadium').style.display='none';
       this.setLocation();
     }
   }
 
   ionViewWillEnter() {
     this.navCtrl.canSwipeBack();
-    if (localStorage.getItem('seatLocation') == null){
+    if (sessionStorage.getItem('seatLocation') == null){
       this.yourLocation = 'Not Set';
     } else {
-      this.yourLocation = localStorage.getItem('seatLocation');
+      this.yourLocation = sessionStorage.getItem('seatLocation');
     }
   }
 
@@ -113,8 +120,9 @@ export class HomePage {
           text: 'Yes',
           handler: data => {
             console.log('Change clicked', data);
-            localStorage.setItem('currentLocation','AT&T Stadium');
+            sessionStorage.setItem('currentLocation','AT&T Stadium');
             document.getElementById('restaurants').style.display='block';
+            document.getElementById('stadium').style.display='block';
             let toast = this.toastCtrl.create({
               message: 'Concessions for AT&T Stadium now available.',
               duration: 3000,
@@ -152,7 +160,7 @@ export class HomePage {
           text: 'Done',
           handler: data => {
             console.log('Change clicked', data);
-            localStorage.setItem('seatLocation', data.location);
+            sessionStorage.setItem('seatLocation', data.location);
             this.yourLocation = data.location;
             let toast = this.toastCtrl.create({
               message: 'Seat was successfully updated.',

@@ -35,7 +35,7 @@ export class CheckoutPage {
     let toast = this.toastCtrl.create({
       showCloseButton: true,
       cssClass: 'profile-bg',
-      message: 'Your order has been sent successfully! And will be delivered to ' + localStorage.getItem('seatLocation'),
+      message: 'Your order has been sent successfully! And will be delivered to ' + sessionStorage.getItem('seatLocation'),
       duration: 3000,
       position: 'bottom'
     });
