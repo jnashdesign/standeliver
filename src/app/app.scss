@@ -14,6 +14,16 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+ion-app, ion-nav, ion-tab, ion-tabs, .app-root {
+	left: inherit;
+	top: inherit;
+	position: relative;
+	max-width: 1200px;
+	margin: 0 auto;
+	background: #000;
+}
+
 .menu-logo {
   height: 80px;
   margin: 12px 0 0 90px;
@@ -34,10 +44,24 @@
 	color: color($colors, primary);
 }
 
+.button-block {
+	margin: 0 auto;
+	max-width: 600px;
+}
+
 .back-button {
 	color: color($colors, dark);
 }
 
+.popover-md .popover-content {
+	right: 40px;
+	left: inherit !important;
+  top: 40px !important;
+}
+
+.toolbar-title {
+	text-align: center;
+}
 // .header-ios .toolbar-background-ios,
 // .footer-ios .toolbar-background-ios {
 //     border-style: solid;

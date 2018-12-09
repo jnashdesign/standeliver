@@ -6,10 +6,6 @@
       <div class="user-profile">
         <ion-list no-margin>
           <ion-item>
-<!-- <ion-avatar item-left>
-              <img src="assets/img/avatar.jpeg">
-            </ion-avatar> -->
-
             <h2 ion-text class="text-white fw700 text-15x">
               {{name}}
             </h2>
@@ -41,9 +37,9 @@
       <button menuClose ion-item (click)="openPage(messagesItem)">
         <ion-icon item-left name="mail"></ion-icon>
         Messages
-        <ion-badge color="dark">
+        <!-- <ion-badge color="dark">
           2
-        </ion-badge>
+        </ion-badge> -->
       </button>
       <button menuClose ion-item *ngFor="let menuItem of appMenuItems" (click)="openPage(menuItem)">
         <ion-icon item-left [name]="menuItem.icon"></ion-icon>

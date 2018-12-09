@@ -11,7 +11,6 @@
   }
 
   .dish-card {
-
     ion-card-content {
       padding: 0;
       background-color: map-get($colors, primary);
@@ -36,12 +35,14 @@
         font-size: 1.5rem;
         color: #fff;
       }
-
       .picture-frame {
         width:100%;
         height:250px;
         overflow: hidden;
         position: relative;
+      }
+      &.card-content-md .picture-frame {
+        height:400px;
       }
       .price {
         position: absolute;
@@ -58,6 +59,9 @@
       }
     }
 
+  }
+  .swiper-slide img {
+    min-width:100%;
   }
 
 }

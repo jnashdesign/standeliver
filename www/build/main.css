@@ -22750,6 +22750,15 @@ ion-navbar.toolbar {
   min-height: calc(56px + env(safe-area-inset-bottom));
 }
 
+ion-app, ion-nav, ion-tab, ion-tabs, .app-root {
+  left: inherit;
+  top: inherit;
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #000;
+}
+
 .menu-logo {
   height: 80px;
   margin: 12px 0 0 90px;
@@ -22771,8 +22780,23 @@ ion-navbar.toolbar {
   color: #cd1e37;
 }
 
+.button-block {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
 .back-button {
   color: #96071a;
+}
+
+.popover-md .popover-content {
+  right: 40px;
+  left: inherit !important;
+  top: 40px !important;
+}
+
+.toolbar-title {
+  text-align: center;
 }
 
 .fw300 {
@@ -23400,6 +23424,10 @@ page-checkout .cc-flags img,
   position: relative;
 }
 
+.dish .dish-card ion-card-content.card-content-md .picture-frame {
+  height: 400px;
+}
+
 .dish .dish-card ion-card-content .price {
   position: absolute;
   bottom: 0;
@@ -23415,6 +23443,10 @@ page-checkout .cc-flags img,
   margin-top: 0.5em;
 }
 
+.dish .swiper-slide img {
+  min-width: 100%;
+}
+
 page-home .imageFrame {
   width: 100%;
   height: 200px;
@@ -23424,6 +23456,7 @@ page-home .imageFrame {
 page-home .imageFrame img {
   width: 100%;
   max-height: inherit;
+  margin-top: -20%;
 }
 
 page-home .seat {
@@ -23607,6 +23640,10 @@ page-restaurant-detail .tab-reviews ion-list ion-item {
 page-restaurant-detail .tab-reviews ion-list ion-item .author {
   color: #96071a;
   font-style: italic;
+}
+
+page-restaurant-detail .swiper-slide img {
+  min-width: 100%;
 }
 
 page-restaurant-filter .item {

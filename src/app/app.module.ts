@@ -89,7 +89,7 @@ export const firebaseConfig = {
       autoFocusAssist: false
     }),
     IonicStorageModule.forRoot({
-      name: '__foodIonicDB',
+      name: '__standeliverDB',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     PipesModule,

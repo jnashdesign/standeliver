@@ -39,7 +39,7 @@
     <name>standeliver</name>
     <description>Event Food Ordering</description>
     <author email="jnashdesign@gmail.com" href="https://jnashdev.com">Standeliver</author>
-    <content original-src="index.html" src="http://192.168.0.5:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />

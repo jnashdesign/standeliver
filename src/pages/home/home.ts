@@ -152,8 +152,8 @@ export class HomePage {
 
   alertLocation() {
     let changeLocation = this.locationCtrl.create({
-      title: 'Change Location',
-      message: "Type your seat and section number you want your food delivered to.",
+      title: 'We Need Your Seat Location For Delivery',
+      message: "Please type your seat and section number you want your food delivered to.",
       inputs: [
         {
           name: 'location',

@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, NavParams, LoadingController, ToastController} from "ionic-angular";
+import {NavController, NavParams, LoadingController, ToastController, AlertController} from "ionic-angular";
 import {Storage} from '@ionic/storage';
 import {OrdersService} from '../../providers/orders-service-mock';
 import {HomePage} from "../home/home";
@@ -15,13 +15,15 @@ export class CheckoutPage {
   paymethods: string = 'creditcard';
   totalVal: number = 0;
   orderNumber: number = Math.floor(Math.random() * 10000);
+  yourLocation: string = "";
 
   constructor(
     public nav: NavController, 
     public navParams: NavParams, 
     private storage: Storage,
     public afd: AngularFireDatabase,
-    public ordersService: OrdersService, 
+    public ordersService: OrdersService,
+    public locationCtrl: AlertController,
     public loadingCtrl: LoadingController, 
     public toastCtrl: ToastController) {
     this.checkoutData = this.navParams.data.orders;
@@ -38,7 +40,10 @@ export class CheckoutPage {
     let loader = this.loadingCtrl.create({
       content: "Please wait..."
     });
-    // show message
+
+    if (sessionStorage.getItem('seatLocation') == null){
+      this.alertLocation();
+    } else {
     let toast = this.toastCtrl.create({
       showCloseButton: true,
       cssClass: 'profile-bg',
@@ -52,13 +57,15 @@ export class CheckoutPage {
     setTimeout(() => {
       loader.dismiss();
 
-      this.ordersService.saveOrder(this.checkoutData, this.totalVal, this.orderNumber).then(data => {
-        toast.present();
-        this.storage.clear();
+      this.ordersService.saveOrder(this.checkoutData, this.totalVal, this.orderNumber)
+        .then(data => {
+          toast.present();
+          this.storage.clear();
       })
 
 
-      this.afd.list('restaurants/'+ sessionStorage.getItem('restaurant') +'/orders').update(
+      this.afd.list('restaurants/'+ sessionStorage.getItem('restaurant') +'/orders')
+      .update(
         JSON.stringify(this.orderNumber), 
           {
             'orderID': this.orderNumber,
@@ -70,4 +77,45 @@ export class CheckoutPage {
       this.nav.setRoot(HomePage);
     }, 3000)
   }
+}
+
+alertLocation() {
+  let changeLocation = this.locationCtrl.create({
+    title: 'We Need Your Seat Location For Delivery',
+    message: "Please type your seat and section number you want your food delivered to.",
+    inputs: [
+      {
+        name: 'location',
+        placeholder: 'Enter your seat Location',
+        type: 'text'
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Done',
+        handler: data => {
+          console.log('Change clicked', data);
+          sessionStorage.setItem('seatLocation', data.location);
+          this.yourLocation = data.location;
+          let toast = this.toastCtrl.create({
+            message: 'Seat was successfully updated.',
+            duration: 3000,
+            position: 'top',
+            closeButtonText: 'OK',
+            showCloseButton: true
+          });
+          toast.present();
+        }
+      }
+    ]
+  });
+  changeLocation.present();
+}
+
 }
