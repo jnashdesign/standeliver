@@ -6,6 +6,7 @@ import {DishService} from '../../providers/dish-service-mock';
 import {CartService} from '../../providers/cart-service-mock';
 import {CartPage} from '../cart/cart';
 import leaflet from 'leaflet';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
     selector: 'page-restaurant-detail',
@@ -17,18 +18,35 @@ export class RestaurantDetailPage {
     markersGroup;
     restaurant: any;
     restaurantopts: String = 'menu';
-    dishes: Array<any>;
+    food: Array<any>;
 
-    constructor(public actionSheetCtrl: ActionSheetController, public navCtrl: NavController, public navParams: NavParams, public cartService: CartService, public restaurantService: RestaurantService, public dishService: DishService, public toastCtrl: ToastController) {
+    constructor(
+        public actionSheetCtrl: ActionSheetController, 
+        public navCtrl: NavController, 
+        public navParams: NavParams, 
+        public cartService: CartService, 
+        public restaurantService: RestaurantService, 
+        public dishService: DishService, 
+        public afd: AngularFireDatabase,
+        public toastCtrl: ToastController) {
         this.restaurant = this.navParams.data;
-        restaurantService.findById(this.restaurant.id).then(
-            restaurant => this.restaurant = restaurant
-        );
-        dishService.findAll().then(data => this.dishes = data);
+        console.log(this.restaurant);
+        sessionStorage.setItem('restaurant',this.restaurant.id);
+        this.getFood();
     }
 
-    openDishDetail(dish) {
-        this.navCtrl.push(DishDetailPage, dish);
+    getFood() {
+        this.afd.list('/restaurants/'+ this.restaurant.id +'/food')
+        .valueChanges().subscribe((data) => {
+          this.food = data;
+        },
+        (err)=>{ 
+          console.log("problem : ", err)
+        })
+      }
+
+    openDishDetail(food) {
+        this.navCtrl.push(DishDetailPage, food);
     }
 
     favorite(restaurant) {

@@ -14,7 +14,12 @@ export class DishDetailPage {
   dish: any;
   qtd: number = 1;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public dishService: DishService, public cartService: CartService) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public toastCtrl: ToastController, 
+    public dishService: DishService, 
+    public cartService: CartService) {
     this.dish = this.navParams.data;
     dishService.findById(this.dish.id).then(
         dish => this.dish = dish
@@ -32,12 +37,13 @@ export class DishDetailPage {
 
   addcart(dish, qtd) {
     let name = dish.name;
-  	this.cartService.addtoCart(dish, qtd).then(dish => {
-      let toast = this.toastCtrl.create({
-          message: name + ' added to Cart',
-          cssClass: 'mytoast',
-          duration: 2000
-      });
+    this.cartService.addtoCart(dish, qtd)
+      .then(dish => {
+        let toast = this.toastCtrl.create({
+            message: name + ' added to Cart',
+            cssClass: 'mytoast',
+            duration: 2000
+        });
       toast.present(toast);
   	});
   }

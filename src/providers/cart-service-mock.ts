@@ -9,7 +9,13 @@ export class CartService {
 
   addtoCart(order, qtd) {
     this.orderCounter = this.orderCounter + 1;
-    this.orders.push({id: this.orderCounter, order: order, qtd: qtd});
+    this.orders.push(
+      {
+        id: this.orderCounter, 
+        order: order, 
+        qtd: qtd, 
+        restaurant: sessionStorage.getItem('restaurant')
+      });
     return Promise.resolve();
   }
 

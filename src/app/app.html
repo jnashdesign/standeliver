@@ -6,15 +6,13 @@
       <div class="user-profile">
         <ion-list no-margin>
           <ion-item>
-
-            <ion-avatar item-left>
+<!-- <ion-avatar item-left>
               <img src="assets/img/avatar.jpeg">
-            </ion-avatar>
+            </ion-avatar> -->
 
             <h2 ion-text class="text-white fw700 text-15x">
-              Joe Schmoe
+              {{name}}
             </h2>
-            <p ion-text color="light">Arlington, TX</p>
 
 				    <button ion-button icon-left round color="primary" menuClose (click)="openPage(accountMenuItems[1])">
 				      <ion-icon [name]="accountMenuItems[1].icon"></ion-icon>
@@ -29,10 +27,10 @@
   </ion-header>
 
   <ion-content color="dark" class="profile-bg">
-    <button ion-button icon-left full color="secondary" no-margin menuClose (click)="openPage(accountMenuItems[2])">
+    <!-- <button ion-button icon-left full color="secondary" no-margin menuClose (click)="openPage(accountMenuItems[2])">
       <ion-icon [name]="accountMenuItems[2].icon"></ion-icon>
       {{accountMenuItems[2].title}}
-    </button>
+    </button> -->
 
     <ion-list class="user-list">
       <button menuClose ion-item (click)="openPage(homeItem)">

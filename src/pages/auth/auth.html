@@ -7,8 +7,8 @@
 			<div class="logo">
 				<img src="assets/img/foodIonic-ico.png">
 			</div>
-			<h2 ion-text class="text-secondary" no-margin>
-				<strong>Food</strong>Ionic
+			<h2 color="white" ion-text no-margin>
+				stand<strong>deliver</strong>
 			</h2>
 		</div>
 
@@ -26,7 +26,7 @@
 		<div [ngSwitch]="auth">
 			<!-- Login form -->
 			<div id="loginForm" *ngSwitchCase="'login'">
-				<form [formGroup]="onLoginForm" class="list-form">
+				<form [formGroup]="onLoginForm" (submit)="login()" class="list-form">
 					<ion-item>
 						<ion-label floating>
 							<ion-icon name="mail" item-start class="text-white"></ion-icon>
@@ -78,15 +78,6 @@
 		    <form [formGroup]="onRegisterForm" class="list-form">
 		      <ion-item>
 		        <ion-label floating>
-		          <ion-icon name="person" item-start class="text-white"></ion-icon>
-		          Full Name
-		        </ion-label>
-		        <ion-input type="text" formControlName="fullName"></ion-input>
-		      </ion-item>
-		      <p ion-text color="danger" class="text-12x has-error" *ngIf="onRegisterForm.get('fullName').touched && onRegisterForm.get('fullName').hasError('required')">This field is required</p>
-
-		      <ion-item>
-		        <ion-label floating>
 		          <ion-icon name="mail" item-start class="text-white"></ion-icon>
 		          Email
 		        </ion-label>
@@ -105,7 +96,7 @@
 		    </form>
 
 		    <div margin-top>
-		      <button ion-button block color="secondary" (click)="login()" [disabled]="!onRegisterForm.valid">
+		      <button ion-button block color="secondary" (click)="signupUser()" [disabled]="!onRegisterForm.valid">
 		        SIGN UP
 		      </button>
 

@@ -3,6 +3,7 @@ import {NavController, NavParams, LoadingController, ToastController} from "ioni
 import {Storage} from '@ionic/storage';
 import {OrdersService} from '../../providers/orders-service-mock';
 import {HomePage} from "../home/home";
+import { AngularFireDatabase } from "angularfire2/database";
 
 @Component({
   selector: 'page-checkout',
@@ -15,7 +16,14 @@ export class CheckoutPage {
   totalVal: number = 0;
   orderNumber: number = Math.floor(Math.random() * 10000);
 
-  constructor(public nav: NavController, public navParams: NavParams, private storage: Storage, public ordersService: OrdersService, public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
+  constructor(
+    public nav: NavController, 
+    public navParams: NavParams, 
+    private storage: Storage,
+    public afd: AngularFireDatabase,
+    public ordersService: OrdersService, 
+    public loadingCtrl: LoadingController, 
+    public toastCtrl: ToastController) {
     this.checkoutData = this.navParams.data.orders;
 
   	this.checkoutData.forEach((val, i) => {
@@ -23,7 +31,6 @@ export class CheckoutPage {
   	});
 
   	this.storage.set('order-' + this.orderNumber, this.checkoutData);
-    console.log(this.checkoutData);
   }
 
   // process send button
@@ -46,8 +53,19 @@ export class CheckoutPage {
       loader.dismiss();
 
       this.ordersService.saveOrder(this.checkoutData, this.totalVal, this.orderNumber).then(data => {
-      	toast.present();
+        toast.present();
+        this.storage.clear();
       })
+
+
+      this.afd.list('restaurants/'+ sessionStorage.getItem('restaurant') +'/orders').update(
+        JSON.stringify(this.orderNumber), 
+          {
+            'orderID': this.orderNumber,
+            'total': this.totalVal,
+            'items': this.navParams.data.orders
+          }
+        );
       // back to home page
       this.nav.setRoot(HomePage);
     }, 3000)

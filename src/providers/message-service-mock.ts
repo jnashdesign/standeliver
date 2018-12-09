@@ -1,24 +1,22 @@
 import {Injectable} from '@angular/core';
-import messages from './mock-messages';
+import { AngularFireDatabase } from 'angularfire2/database';
+import {Storage} from '@ionic/storage';
 
 @Injectable()
 export class MessageService {
 
   messageCounter: number = 0;
-  messages: Array<any> = messages;
-
-  constructor() {
-      console.log('mock messages: ', messages);
-      console.log(this.messages)
+  messages: any;
+  constructor(
+    public afd: AngularFireDatabase,
+    public storage: Storage
+  ) {
+    this.messages = this.storage.get('messages');
   }
 
   findById(id) {
     console.log(id)
     return Promise.resolve(this.messages[id - 1]);
-  }
-
-  getMessages() {
-    return Promise.resolve(this.messages);
   }
 
   message(message) {

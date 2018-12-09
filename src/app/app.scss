@@ -27,6 +27,13 @@
 	}
 }
 
+.centerLink {
+	text-align: center;
+	text-decoration: underline;
+	padding: 10px;
+	color: color($colors, primary);
+}
+
 .back-button {
 	color: color($colors, dark);
 }

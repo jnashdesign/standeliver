@@ -1,5 +1,6 @@
 import {Component} from "@angular/core";
 import {NavController} from "ionic-angular";
+import {AuthPage} from '../../pages/auth/auth';
 
 @Component({
   selector: 'page-settings',
@@ -11,7 +12,8 @@ export class SettingsPage {
   }
 
   // logout
-  // logout() {
-  //   this.nav.setRoot(LoginPage);
-  // }
+  logout() {
+    localStorage.clear();
+    this.nav.setRoot(AuthPage);
+  }
 }

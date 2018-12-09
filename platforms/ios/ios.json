@@ -43,22 +43,22 @@
   },
   "installed_plugins": {
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.ionicframework.foodionic"
+      "PACKAGE_NAME": "com.standeliver"
     },
     "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.ionicframework.foodionic"
+      "PACKAGE_NAME": "com.standeliver"
     },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.ionicframework.foodionic"
+      "PACKAGE_NAME": "com.standeliver"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.ionicframework.foodionic"
+      "PACKAGE_NAME": "com.standeliver"
     },
     "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "com.ionicframework.foodionic"
+      "PACKAGE_NAME": "com.standeliver"
     },
     "ionic-plugin-keyboard": {
-      "PACKAGE_NAME": "com.ionicframework.foodionic"
+      "PACKAGE_NAME": "com.standeliver"
     }
   },
   "dependent_plugins": {},

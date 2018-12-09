@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
 import { CheckoutPage } from '../checkout/checkout';
-
 import { CartService } from '../../providers/cart-service-mock';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-cart',
@@ -15,7 +14,11 @@ export class CartPage {
 	orders: Array<any> = [];
 	totalVal: number = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public cartService: CartService) {
+  constructor(
+      public navCtrl: NavController, 
+      public navParams: NavParams,
+      public storage: Storage,
+      public cartService: CartService) {
     this.getOrders();
   }
 
@@ -29,7 +32,8 @@ export class CartPage {
 
   getOrders () {
     this.cartService.getOrders().then(orders => {
-    	this.orders = orders
+        this.orders = orders;
+        this.storage.set('orders',this.orders)
     	this.totalVal = 0;
     	this.orders.forEach((val, i) => {
     		this.totalVal = this.totalVal + (val.order.price * val.qtd)

@@ -28,19 +28,31 @@ import {NotificationsPage} from '../pages/notifications/notifications';
 import {MessageListPage} from '../pages/message-list/message-list';
 import {MessageDetailPage} from '../pages/message-detail/message-detail';
 import {YourRestaurantPage} from '../pages/your-restaurant/your-restaurant';
-
 import { PipesModule } from '../pipes/pipes.module';
-
 import {MessageService} from "../providers/message-service-mock";
 import {RestaurantService} from "../providers/restaurant-service-mock";
 import {DishService} from "../providers/dish-service-mock";
 import {CategoryService} from "../providers/category-service-mock";
 import {CartService} from "../providers/cart-service-mock";
 import {OrdersService} from "../providers/orders-service-mock";
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Keyboard } from '@ionic-native/keyboard';
+
+// Import the AF2 Module
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+// AF2 Settings
+export const firebaseConfig = {
+    apiKey: "AIzaSyCHBfOtN1SSd5oaVxk_UjthNnrYK1cGLM8",
+    authDomain: "standeliver-prototype.firebaseapp.com",
+    databaseURL: "https://standeliver-prototype.firebaseio.com",
+    projectId: "standeliver-prototype",
+    storageBucket: "standeliver-prototype.appspot.com",
+    messagingSenderId: "268248628178"
+};
 
 @NgModule({
   declarations: [
@@ -80,7 +92,10 @@ import { Keyboard } from '@ionic-native/keyboard';
       name: '__foodIonicDB',
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
-    PipesModule
+    PipesModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

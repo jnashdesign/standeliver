@@ -74,6 +74,10 @@ page-auth,
 
           input {
             color: color($colors, light);
+            &:focus{
+              background-color: color($colors, dark);
+              padding:10px;
+            }
           }
         }
       }

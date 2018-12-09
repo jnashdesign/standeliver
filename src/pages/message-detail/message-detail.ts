@@ -11,7 +11,10 @@ export class MessageDetailPage {
 
 	message: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public service: MessageService) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public service: MessageService) {
     this.message = this.navParams.data;
   }
 

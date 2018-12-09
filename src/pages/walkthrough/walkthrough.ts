@@ -58,4 +58,10 @@ export class WalkthroughPage {
     console.log('ionViewDidLoad WalkthroughPage');
   }
 
+  ionViewWillEnter(){
+    if (localStorage.getItem('loggedIn') == 'true'){
+      this.navCtrl.setRoot(HomePage);
+    }
+  }
+
 }

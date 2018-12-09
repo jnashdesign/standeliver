@@ -50,7 +50,7 @@
 	      Reviews
 	    </ion-segment-button>
 	    <ion-segment-button value="info" (click)="showMap()">
-	      Information
+	      Location
 	    </ion-segment-button>
 	  </ion-segment>
 
@@ -58,7 +58,7 @@
 			<div *ngSwitchCase="'menu'">
 
 				<ion-list>
-				  <ion-item no-padding *ngFor="let dish of dishes" tapplable (click)="openDishDetail(dish)">
+				  <ion-item no-padding *ngFor="let dish of food" tapplable (click)="openDishDetail(dish)">
 				    <ion-thumbnail item-start>
 				      <img src="{{dish.picture}}">
 				    </ion-thumbnail>
@@ -100,7 +100,7 @@
 				<p ion-text text-center color="dark" class="fw700">{{restaurant.address}}, {{restaurant.city}} {{restaurant.state}}</p>
 				<hr margin-bottom>
 
-				<h2>
+				<!-- <h2>
 					<span ion-text class="fw700">About</span>
 				</h2>
 				<p ion-text margin-bottom>{{ restaurant.description }}</p>
@@ -113,7 +113,7 @@
 				<h2>
 					<span ion-text class="fw700">Phone</span>
 				</h2>
-				<p ion-text margin-bottom>+1 (212) 999 0001</p>
+				<p ion-text margin-bottom>+1 (212) 999 0001</p> -->
 
 				<br><br>
 			</div>

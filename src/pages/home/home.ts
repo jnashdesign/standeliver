@@ -8,9 +8,12 @@ import {RestaurantDetailPage} from '../restaurant-detail/restaurant-detail';
 import {RestaurantFilterPage} from '../restaurant-filter/restaurant-filter';
 import {NotificationsPage} from '../notifications/notifications';
 import {NearbyPage} from '../nearby/nearby';
+import {MessageListPage} from '../message-list/message-list';
 import {CategoryPage} from '../category/category';
 import {OrdersPage} from '../orders/orders';
 import {CartPage} from '../cart/cart';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -20,6 +23,7 @@ import {CartPage} from '../cart/cart';
 export class HomePage {
 
   restaurants: Array<any>;
+  messages: Array<any>;
   searchKey: string = "";
   yourLocation: string = "";
 
@@ -28,7 +32,9 @@ export class HomePage {
     public popoverCtrl: PopoverController, 
     public locationCtrl: AlertController, 
     public modalCtrl: ModalController, 
-    public toastCtrl: ToastController, 
+    public toastCtrl: ToastController,
+    public afd: AngularFireDatabase,
+    public storage: Storage,
     public service: RestaurantService) {
 		this.findAll();
   }
@@ -43,11 +49,13 @@ export class HomePage {
 
   ionViewWillEnter() {
     this.navCtrl.canSwipeBack();
+    sessionStorage.removeItem('restaurant');
     if (sessionStorage.getItem('seatLocation') == null){
       this.yourLocation = 'Not Set';
     } else {
       this.yourLocation = sessionStorage.getItem('seatLocation');
     }
+    this.getMessages();
   }
 
   openRestaurantListPage(proptype) {
@@ -100,9 +108,13 @@ export class HomePage {
 	}
 
 	findAll() {
-	    this.service.findAll()
-	        .then(data => this.restaurants = data)
-	        .catch(error => alert(error));
+    this.afd.list('/restaurants')
+    .valueChanges().subscribe((data) => {
+      this.restaurants = data;
+    },
+    (err)=>{ 
+      console.log("problem : ", err)
+    })
   }
   
   setLocation() {
@@ -183,5 +195,17 @@ export class HomePage {
     popover.present({
       ev: myEvent
     });
+  }
+
+  getMessages(){
+    this.afd.list('/users/' + localStorage.getItem('userID')+'/messages/')
+      .valueChanges().subscribe((data) => {
+        this.messages = data;
+        this.storage.set('messages',this.messages);
+        console.log('messages: '+JSON.stringify(this.messages));
+      },
+      (err)=>{ 
+        console.log("problem : ", err)
+      })
   }
 }
