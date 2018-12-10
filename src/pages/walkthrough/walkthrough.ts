@@ -16,18 +16,18 @@ export class WalkthroughPage {
   slideList: Array<any> = [
     {
       title: "What is Stan<strong>deliver</strong>?",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque maximus, dui accumsan cursus lacinia, nisl risus.",
-      image: "assets/img/foodIonic-ico.png",
+      description: "It is an app that makes sure you never miss a moment of a great game.",
+      image: "assets/img/standeliver.png",
     },
     {
-      title: "Why is it awesome?",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque maximus, dui accumsan cursus lacinia, nisl risus.",
-      image: "assets/img/foodIonic-ico.png",
+      title: "Why should I use it?",
+      description: "You can order your food and we will deliver it right to your seat.",
+      image: "assets/img/phone.png",
     },
     {
-      title: "Your food is on the way!",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque maximus, dui accumsan cursus lacinia, nisl risus.",
-      image: "assets/img/foodIonic-ico.png",
+      title: "Never fight the crowds again.",
+      description: "No one likes standing in line waiting for food. Let us handle it for you.",
+      image: "assets/img/crowd.png",
     }
   ];
 

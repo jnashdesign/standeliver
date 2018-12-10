@@ -18,7 +18,7 @@ export class RestaurantDetailPage {
     markersGroup;
     restaurant: any;
     restaurantopts: String = 'menu';
-    food: Array<any>;
+    items: Array<any>;
 
     constructor(
         public actionSheetCtrl: ActionSheetController, 
@@ -32,21 +32,21 @@ export class RestaurantDetailPage {
         this.restaurant = this.navParams.data;
         console.log(this.restaurant);
         sessionStorage.setItem('restaurant',this.restaurant.id);
-        this.getFood();
+        this.getItems();
     }
 
-    getFood() {
-        this.afd.list('/restaurants/'+ this.restaurant.id +'/food')
+    getItems() {
+        this.afd.list('/restaurants/'+ this.restaurant.id +'/items')
         .valueChanges().subscribe((data) => {
-          this.food = data;
+          this.items = data;
         },
         (err)=>{ 
           console.log("problem : ", err)
         })
       }
 
-    openDishDetail(food) {
-        this.navCtrl.push(DishDetailPage, food);
+    openItemDetail(items) {
+        this.navCtrl.push(DishDetailPage, items);
     }
 
     favorite(restaurant) {

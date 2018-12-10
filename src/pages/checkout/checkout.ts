@@ -76,7 +76,8 @@ export class CheckoutPage {
             'orderTime': dateTime,
             'seatNum':  sessionStorage.getItem('seatLocation'),
             'total': this.totalVal,
-            'items': this.navParams.data.orders
+            'items': this.navParams.data.orders,
+            'status': 'Ordered'
           }
         );
       // back to home page

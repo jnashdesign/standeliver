@@ -23242,8 +23242,8 @@ page-auth .scroll-content .auth-content,
 
 page-auth .scroll-content .auth-content .logo,
 .auth .scroll-content .auth-content .logo {
-  width: 80px;
-  height: 80px;
+  width: 250px;
+  height: 135px;
   margin: 40px auto 0;
 }
 
@@ -23722,7 +23722,6 @@ page-walkthrough .slide-title {
 
 page-walkthrough .slide-image {
   max-height: 50%;
-  max-width: 60%;
   margin: 18px 0;
 }
 

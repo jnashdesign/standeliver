@@ -58,13 +58,13 @@
 			<div *ngSwitchCase="'menu'">
 
 				<ion-list>
-				  <ion-item no-padding *ngFor="let dish of food" tapplable (click)="openDishDetail(dish)">
+				  <ion-item no-padding *ngFor="let item of items" tapplable (click)="openItemDetail(item)">
 				    <ion-thumbnail item-start>
-				      <img src="{{dish.picture}}">
+				      <img src="{{item.picture}}">
 				    </ion-thumbnail>
-	          <h2 ion-text color="dark" class="fw500">{{dish.name}}</h2>
-	          <p ion-text color="primary" class="text-11x">{{ dish.ingredients }}</p>
-				    <button ion-button clear class="secondary-bg text-white" item-end>{{ dish.price | currency:'USD':true }}</button>
+	          <h2 ion-text color="dark" class="fw500">{{item.name}}</h2>
+	          <p ion-text color="primary" class="text-11x">{{ item.ingredients }}</p>
+				    <button ion-button clear class="secondary-bg text-white" item-end>{{ item.price | currency:'USD':true }}</button>
 				  </ion-item>
 				</ion-list>
 
