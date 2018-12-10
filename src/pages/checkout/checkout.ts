@@ -63,12 +63,18 @@ export class CheckoutPage {
           this.storage.clear();
       })
 
+      var today = new Date();
+      var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
+      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      var dateTime = time+' ('+date+')';
 
       this.afd.list('restaurants/'+ sessionStorage.getItem('restaurant') +'/orders')
       .update(
         JSON.stringify(this.orderNumber), 
           {
             'orderID': this.orderNumber,
+            'orderTime': dateTime,
+            'seatNum':  sessionStorage.getItem('seatLocation'),
             'total': this.totalVal,
             'items': this.navParams.data.orders
           }
