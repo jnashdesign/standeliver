@@ -22,11 +22,11 @@ let restaurants: Array<any> = [
         period: "none",
         price: "$$$",
         rating: 4.4,
-        dishes: {
+        items: {
             id: 1,
             name: "Caroline Seymor",
             title: "Senior Broker",
-            picture: "assets/img/dishes/caroline_seymor.jpg"
+            picture: "assets/img/items/caroline_seymor.jpg"
         },
 	    reviews: [
 	      {
@@ -42,7 +42,7 @@ let restaurants: Array<any> = [
 	        username: " Alejandro Suarez",
 	        from: "Bogotá, CO",
 	        title: "Close to old quarter",
-	        content: "Nice dishes Staff very helpful. Easy to get cabs",
+	        content: "Nice items Staff very helpful. Easy to get cabs",
 	        rating: 4
 	      },
 	      {
@@ -86,11 +86,11 @@ let restaurants: Array<any> = [
 			period: "none",
 			price: "$$$$",
 			rating: 5,
-			dishes: {
+			items: {
 					id: 1,
 					name: "Caroline Seymor",
 					title: "Senior Broker",
-					picture: "assets/img/dishes/caroline_seymor.jpg"
+					picture: "assets/img/items/caroline_seymor.jpg"
 			},
 		reviews: [
 			{
@@ -106,7 +106,7 @@ let restaurants: Array<any> = [
 				username: " Alejandro Suarez",
 				from: "Bogotá, CO",
 				title: "Close to old quarter",
-				content: "Nice dishes Staff very helpful. Easy to get cabs",
+				content: "Nice items Staff very helpful. Easy to get cabs",
 				rating: 4
 			},
 			{

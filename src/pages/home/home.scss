@@ -3,10 +3,19 @@ page-home {
 		width:100%;
 		height:200px;
 		overflow: hidden;
+		position: relative;
 		img {
 			width:100%;
 			max-height:inherit;
 			margin-top: -20%;
+		}
+		.stadiumTitle {
+			padding: 10px;
+			background-color: rgba(0,0,0,0.5);
+			color: #fff;
+			position:absolute; 
+			bottom: 0; 
+			right: 0;
 		}
 	}
 	.seat {

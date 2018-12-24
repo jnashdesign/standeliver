@@ -22,9 +22,13 @@
         <div ion-item>
         	<!-- (click)="itemTapped(favorite)" -->
             <ion-thumbnail item-left>
-                <img src="{{order.order.picture}}"/>
+                <img src="{{order.details.picture}}"/>
             </ion-thumbnail>
-              <h2 ion-text color="dark" class="fw700">{{order.order.name}}</h2>
+              <h2 ion-text color="dark" class="fw700">{{order.details.name}}</h2>
+              <p *ngIf="order.options" ion-text color="dark">
+                <span *ngFor="let option of order.options; let isLast=last">
+                    {{option}}{{isLast ? '' : ', '}}</span>
+              </p>
 				      <ion-grid class="filters" no-padding>
 				        <ion-row>
 				          <ion-col text-center col-2>
@@ -42,7 +46,7 @@
 				        </ion-row>
 				      </ion-grid>
             <div item-right>
-							<ion-badge>{{ order.order.price * order.qtd | currency:'USD':true }}</ion-badge>
+							<ion-badge>{{ order.details.price * order.qtd | currency:'USD':true }}</ion-badge>
             </div>
         </div>
         <ion-item-options>
@@ -53,12 +57,14 @@
 
   <ion-card class="primary-bg" *ngIf="orders.length">
     <ion-card-content>
-      <p ion-text color="light">Delivery Tax (30 - 60min): <span class="fw700">FREE</span></p>
+      <p ion-text color="light">Order subtotal: <span class="fw700" style="float:right">{{ totalVal | currency:'USD':true }}</span></p>
+      <p ion-text color="light">Extras: <span class="fw700" style="float:right">{{ extrasum | currency:'USD':true }}</span></p>
+      <p ion-text color="light">Delivery Time (10 - 15min): <span class="fw700" style="float:right">Fee: $2.00</span></p>
 
 			<hr>
 
       <p ion-text color="light">Total Order Value</p>
-      <h2 ion-text class="text-white fw700">{{ totalVal | currency:'USD':true }}</h2>
+      <h1  style="float:right" ion-text class="text-white fw700">{{ totalVal + extrasum + 2 | currency:'USD':true }}</h1>
     </ion-card-content>
   </ion-card>
 

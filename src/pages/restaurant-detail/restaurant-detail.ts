@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
 import {ActionSheetController, ActionSheet, NavController, NavParams, ToastController} from 'ionic-angular';
-import {DishDetailPage} from '../dish-detail/dish-detail';
+import {ItemDetailPage} from '../item-detail/item-detail';
 import {RestaurantService} from '../../providers/restaurant-service-mock';
-import {DishService} from '../../providers/dish-service-mock';
+// import {ItemService} from '../../providers/item-service-mock';
 import {CartService} from '../../providers/cart-service-mock';
 import {CartPage} from '../cart/cart';
 import leaflet from 'leaflet';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Storage } from '@ionic/storage';
 
 @Component({
     selector: 'page-restaurant-detail',
@@ -26,8 +27,9 @@ export class RestaurantDetailPage {
         public navParams: NavParams, 
         public cartService: CartService, 
         public restaurantService: RestaurantService, 
-        public dishService: DishService, 
+        // public itemService: ItemService, 
         public afd: AngularFireDatabase,
+        public storage: Storage,
         public toastCtrl: ToastController) {
         this.restaurant = this.navParams.data;
         console.log(this.restaurant);
@@ -39,14 +41,16 @@ export class RestaurantDetailPage {
         this.afd.list('/restaurants/'+ this.restaurant.id +'/items')
         .valueChanges().subscribe((data) => {
           this.items = data;
+          this.storage.set('items', data);
         },
         (err)=>{ 
           console.log("problem : ", err)
         })
       }
 
-    openItemDetail(items) {
-        this.navCtrl.push(DishDetailPage, items);
+    openItemDetail(item) {
+        console.log(item);
+        this.navCtrl.push(ItemDetailPage, item);
     }
 
     favorite(restaurant) {

@@ -14,6 +14,7 @@ import {OrdersPage} from '../orders/orders';
 import {CartPage} from '../cart/cart';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Storage } from '@ionic/storage';
+import { FcmProvider } from '../../providers/fcm/fcm';
 
 @Component({
   selector: 'page-home',
@@ -26,6 +27,8 @@ export class HomePage {
   messages: Array<any>;
   searchKey: string = "";
   yourLocation: string = "";
+  stadiumIMG: any;
+  stadium: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -35,8 +38,20 @@ export class HomePage {
     public toastCtrl: ToastController,
     public afd: AngularFireDatabase,
     public storage: Storage,
+    public fcm: FcmProvider,
     public service: RestaurantService) {
-		this.findAll();
+    this.findAll();
+    if(sessionStorage.getItem('currentLocation') == null){
+      // do nothing
+    }else{
+      if (sessionStorage.getItem('currentLocation') == 'Kincaid Stadium'){
+        this.stadiumIMG = 'assets/img/kincaid.jpg';
+        this.stadium = sessionStorage.getItem('currentLocation')
+      } else {
+        this.stadiumIMG = 'assets/img/Forester-Athletic-Complex.jpg';
+        this.stadium = sessionStorage.getItem('currentLocation')
+      }
+    }
   }
 
   ionViewDidLoad() {
@@ -48,6 +63,7 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
+    this.fcm.getToken();
     this.navCtrl.canSwipeBack();
     sessionStorage.removeItem('restaurant');
     if (sessionStorage.getItem('seatLocation') == null){
@@ -116,27 +132,42 @@ export class HomePage {
       console.log("problem : ", err)
     })
   }
-  
-  setLocation() {
+
+    setLocation() {
     let setLocation = this.locationCtrl.create({
       title: 'Set Location',
-      message: "It appears you're at AT&T Stadium. Is this correct?",
+      message: "Choose stadium to see available concession stands.",
       buttons: [
         {
-          text: 'No',
+          text: 'Kincaid Stadium',
           handler: data => {
-            console.log('No clicked');
+            console.log('Change clicked', data);
+            sessionStorage.setItem('currentLocation','Kincaid Stadium');
+            document.getElementById('restaurants').style.display='block';
+            document.getElementById('stadium').style.display='block';
+            this.stadiumIMG = 'assets/img/kincaid.jpg';
+            this.stadium = 'Kincaid Stadium';
+            let toast = this.toastCtrl.create({
+              message: 'Concessions for Kincaid Stadium now available.',
+              duration: 3000,
+              position: 'top',
+              closeButtonText: 'OK',
+              showCloseButton: true
+            });
+            toast.present();
           }
         },
         {
-          text: 'Yes',
+          text: 'Forester Athletic Complex',
           handler: data => {
             console.log('Change clicked', data);
-            sessionStorage.setItem('currentLocation','AT&T Stadium');
+            sessionStorage.setItem('currentLocation','Forester Athletic Complex');
             document.getElementById('restaurants').style.display='block';
             document.getElementById('stadium').style.display='block';
+            this.stadiumIMG = 'assets/img/Forester-Athletic-Complex.jpg';
+            this.stadium = 'Forester Athletic Complex';
             let toast = this.toastCtrl.create({
-              message: 'Concessions for AT&T Stadium now available.',
+              message: 'Concessions for Forester Athletic Complex now available.',
               duration: 3000,
               position: 'top',
               closeButtonText: 'OK',
@@ -150,10 +181,43 @@ export class HomePage {
     setLocation.present();
   }
 
+  // setLocation() {
+  //   let setLocation = this.locationCtrl.create({
+  //     title: 'Set Location',
+  //     message: "It appears you're at AT&T Stadium. Is this correct?",
+  //     buttons: [
+  //       {
+  //         text: 'No',
+  //         handler: data => {
+  //           console.log('No clicked');
+  //         }
+  //       },
+  //       {
+  //         text: 'Yes',
+  //         handler: data => {
+  //           console.log('Change clicked', data);
+  //           sessionStorage.setItem('currentLocation','AT&T Stadium');
+  //           document.getElementById('restaurants').style.display='block';
+  //           document.getElementById('stadium').style.display='block';
+  //           let toast = this.toastCtrl.create({
+  //             message: 'Concessions for AT&T Stadium now available.',
+  //             duration: 3000,
+  //             position: 'top',
+  //             closeButtonText: 'OK',
+  //             showCloseButton: true
+  //           });
+  //           toast.present();
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   setLocation.present();
+  // }
+
   alertLocation() {
     let changeLocation = this.locationCtrl.create({
       title: 'We Need Your Seat Location For Delivery',
-      message: "Please type your seat and section number you want your food delivered to.",
+      message: "Please type your seat and section number you want your food delivered.",
       inputs: [
         {
           name: 'location',

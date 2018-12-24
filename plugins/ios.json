@@ -8,22 +8,25 @@
   },
   "installed_plugins": {
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.standeliver"
+      "PACKAGE_NAME": "com.standeliver.Prototype"
+    },
+    "cordova-plugin-firebase": {
+      "PACKAGE_NAME": "com.standeliver.Prototype"
     },
     "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.standeliver"
+      "PACKAGE_NAME": "com.standeliver.Prototype"
     },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.standeliver"
+      "PACKAGE_NAME": "com.standeliver.Prototype"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.standeliver"
+      "PACKAGE_NAME": "com.standeliver.Prototype"
     },
     "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "com.standeliver"
+      "PACKAGE_NAME": "com.standeliver.Prototype"
     },
     "ionic-plugin-keyboard": {
-      "PACKAGE_NAME": "com.standeliver"
+      "PACKAGE_NAME": "com.standeliver.Prototype"
     }
   },
   "dependent_plugins": {}

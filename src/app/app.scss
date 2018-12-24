@@ -15,13 +15,19 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+html {
+	background-image: url('../assets/img/seats.jpg');
+	background-size: cover;
+}
+
 ion-app, ion-nav, ion-tab, ion-tabs, .app-root {
 	left: inherit;
 	top: inherit;
 	position: relative;
-	max-width: 1200px;
+	max-width: 600px;
 	margin: 0 auto;
-	background: #000;
+	background-color: #000;
+	box-shadow: 1px 0px 45px rgba(0,0,0,0.75);
 }
 
 .menu-logo {
@@ -35,6 +41,14 @@ ion-app, ion-nav, ion-tab, ion-tabs, .app-root {
 	&::after {
 		background: none;
 	}
+}
+
+.item-ios ion-thumbnail ion-img,
+.item-ios ion-thumbnail img,
+.item-md ion-thumbnail ion-img,
+.item-md ion-thumbnail img {
+  width: 80px;
+  height: auto;
 }
 
 .centerLink {

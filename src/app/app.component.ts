@@ -8,7 +8,7 @@ import {WalkthroughPage} from '../pages/walkthrough/walkthrough';
 import {HomePage} from '../pages/home/home';
 import {MyAccountPage} from '../pages/my-account/my-account';
 import {RestaurantListPage} from '../pages/restaurant-list/restaurant-list';
-import {DishListPage} from '../pages/dish-list/dish-list';
+import {ItemListPage} from '../pages/item-list/item-list';
 import {FavoriteListPage} from '../pages/favorite-list/favorite-list';
 import {AboutPage} from '../pages/about/about';
 import {SupportPage} from '../pages/support/support';
@@ -53,7 +53,7 @@ export class MyApp {
 
         this.appMenuItems = [
             // {title: 'Restaurants', component: RestaurantListPage, icon: 'home'},
-            // {title: 'Dish List', component: DishListPage, icon: 'pizza'},
+            // {title: 'Item List', component: ItemListPage, icon: 'pizza'},
             // {title: 'Nearby', component: NearbyPage, icon: 'compass'},
             // {title: 'By Category', component: CategoryPage, icon: 'albums'},
             {title: 'Past Orders', component: OrdersPage, icon: 'list-box'},
@@ -80,12 +80,13 @@ export class MyApp {
         ];
 
         this.name = localStorage.getItem('userEmail');
-
     }
 
     initializeApp() {
         this.platform.ready().then(() => {
-            this.statusBar.styleLightContent();
+            StatusBar
+            this.statusBar.overlaysWebView(false);
+            this.statusBar.backgroundColorByHexString('#000000');
             this.splashScreen.hide();
         });
     }

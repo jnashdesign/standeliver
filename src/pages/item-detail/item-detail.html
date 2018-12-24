@@ -1,0 +1,85 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            <span ion-text>{{item.name}}</span>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="item lightest-bg">
+
+  <ion-card class="item-card">
+
+    <ion-card-content class="profiles-bg">
+			<div class="picture-frame">
+					<img [src]="item.picture">
+			<div class="price">
+						<h1 ion-text class="text-white fw700">{{ item.price + item.extrasum | currency:'USD':true }}</h1>
+			</div>
+			</div>
+			<div padding>
+	      <ion-grid class="filters" no-padding>
+	        <ion-row margin-bottom>
+	          <ion-col text-center>
+	            <ion-icon name="remove-circle" class="circle" tappable (click)="minusQtd()" [hidden]="qtd < 2"
+	                      color="secondary"></ion-icon>
+	          </ion-col>
+	          <ion-col width-10 text-center>
+	          	<h4 ion-text color="light">Quantity:</h4>
+	          	<h2 ion-text>{{ qtd }}</h2>
+	          </ion-col>
+	          <ion-col width-10 text-center>
+	            <ion-icon name="add-circle" class="circle" tappable (click)="plusQtd()" color="secondary"></ion-icon>
+						</ion-col>
+						<ion-col>
+								<button ion-button color="secondary" icon-left tappable (click)="addcart(item, qtd)">
+										<!-- Add to Cart ({{ item.price * qtd | currency:'USD':true }}) -->
+										Add to Cart
+									</button>
+						</ion-col>
+					</ion-row>
+					<div *ngIf="item.name == 'Drinks' || item.name == 'Candy'">
+						<ion-list *ngFor="let option of options" radio-group [(ngModel)]="drinks">
+							<ion-item>
+								<ion-label>{{option.name}}</ion-label>
+								<ion-radio value="{{option.name}}" (ionSelect)="chooseDrink(item, option.name, option.price)"></ion-radio>
+							</ion-item>
+						</ion-list>	
+					</div>
+					<button *ngIf="options?.length > 1 && item.name !== 'Drinks'" ion-button color="secondary" icon-left tappable (click)="customizeToggle()">
+									Customize</button>
+					<ion-row margin-bottom id="options" style="display:none;">
+							<ion-col text-center>
+								<ion-list *ngFor="let option of options">
+										<ion-item>
+												<ion-label>{{option.name}} (+ ${{option.price.toFixed(2)}})</ion-label>
+												<ion-checkbox color="dark" [(ngModel)]="option.name.checked" (ngModelChange)="addToOrder(item, option.name, option.price)" checked="false"></ion-checkbox>
+											</ion-item>
+								</ion-list>
+								</ion-col>
+	        </ion-row>
+	      </ion-grid>
+			</div>
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- <ion-card>
+    <ion-card-content>
+      <h2 ion-text color="primary" class="fw500">Ingredients</h2> -->
+      <!-- <p ion-text>{{item.ingredients}}</p> -->
+			<!-- <hr>
+      <h2 ion-text color="primary" class="fw500">Description</h2>
+      <p ion-text>{{item.description}}</p>
+    </ion-card-content> -->
+  <!-- </ion-card> -->
+
+  <br><br><br><br><br>
+
+  <ion-fab bottom right>
+    <button ion-fab round icon-only color="dark" (click)="openCart()">
+      <ion-icon name="cart" class="text-white"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>

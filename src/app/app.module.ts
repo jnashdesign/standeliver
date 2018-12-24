@@ -15,8 +15,8 @@ import {SettingsPage} from '../pages/settings/settings';
 import {RestaurantListPage} from '../pages/restaurant-list/restaurant-list';
 import {RestaurantFilterPage} from '../pages/restaurant-filter/restaurant-filter';
 import {RestaurantDetailPage} from '../pages/restaurant-detail/restaurant-detail';
-import {DishListPage} from '../pages/dish-list/dish-list';
-import {DishDetailPage} from '../pages/dish-detail/dish-detail';
+import {ItemListPage} from '../pages/item-list/item-list';
+import {ItemDetailPage} from '../pages/item-detail/item-detail';
 import {CategoryPage} from '../pages/category/category';
 import {CartPage} from '../pages/cart/cart';
 import {CheckoutPage} from '../pages/checkout/checkout';
@@ -31,18 +31,21 @@ import {YourRestaurantPage} from '../pages/your-restaurant/your-restaurant';
 import { PipesModule } from '../pipes/pipes.module';
 import {MessageService} from "../providers/message-service-mock";
 import {RestaurantService} from "../providers/restaurant-service-mock";
-import {DishService} from "../providers/dish-service-mock";
+import {ItemService} from "../providers/item-service-mock";
 import {CategoryService} from "../providers/category-service-mock";
 import {CartService} from "../providers/cart-service-mock";
 import {OrdersService} from "../providers/orders-service-mock";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Keyboard } from '@ionic-native/keyboard';
+import { Firebase } from '@ionic-native/firebase';
+import { FirebaseMessaging } from '@ionic-native/firebase-messaging';
 
 // Import the AF2 Module
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { FcmProvider } from '../providers/fcm/fcm';
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -69,8 +72,8 @@ export const firebaseConfig = {
     RestaurantFilterPage,
     RestaurantDetailPage,
     FavoriteListPage,
-    DishListPage,
-    DishDetailPage,
+    ItemListPage,
+    ItemDetailPage,
     CategoryPage,
     NotificationsPage,
     MessageListPage,
@@ -112,8 +115,8 @@ export const firebaseConfig = {
     RestaurantFilterPage,
     RestaurantDetailPage,
     FavoriteListPage,
-    DishListPage,
-    DishDetailPage,
+    ItemListPage,
+    ItemDetailPage,
     CategoryPage,
     NotificationsPage,
     MessageListPage,
@@ -128,12 +131,15 @@ export const firebaseConfig = {
     SplashScreen,
     Keyboard,
     RestaurantService,
-    DishService,
+    ItemService,
     CategoryService,
     MessageService,
     CartService,
     OrdersService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Firebase,
+    FirebaseMessaging,
+    FcmProvider
   ]
 })
 export class AppModule {}

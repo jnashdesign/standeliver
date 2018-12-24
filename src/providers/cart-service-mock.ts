@@ -1,21 +1,25 @@
 import {Injectable} from '@angular/core';
-// import restaurants from './mock-restaurants';
 
 @Injectable()
 export class CartService {
 
   orderCounter: number = 0;
   orders: Array<any> = [];
+  options: any;
 
-  addtoCart(order, qtd) {
+  addtoCart(item, qtd) {
     this.orderCounter = this.orderCounter + 1;
-    this.orders.push(
-      {
+    item.id = Math.floor(Math.random() * 1000);
+
+    this.orders.push({
         id: this.orderCounter, 
-        order: order, 
+        details: item,
+        extras: item.extrasum,
+        options: item.selectedOptions,
         qtd: qtd, 
         restaurant: sessionStorage.getItem('restaurant')
       });
+
     return Promise.resolve();
   }
 

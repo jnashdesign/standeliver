@@ -22750,13 +22750,20 @@ ion-navbar.toolbar {
   min-height: calc(56px + env(safe-area-inset-bottom));
 }
 
+html {
+  background-image: url("../assets/img/seats.jpg");
+  background-size: cover;
+}
+
 ion-app, ion-nav, ion-tab, ion-tabs, .app-root {
   left: inherit;
   top: inherit;
   position: relative;
-  max-width: 1200px;
+  max-width: 600px;
   margin: 0 auto;
-  background: #000;
+  background-color: #000;
+  -webkit-box-shadow: 1px 0px 45px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 0px 45px rgba(0, 0, 0, 0.75);
 }
 
 .menu-logo {
@@ -22771,6 +22778,14 @@ ion-app, ion-nav, ion-tab, ion-tabs, .app-root {
 
 .header-md::after {
   background: none;
+}
+
+.item-ios ion-thumbnail ion-img,
+.item-ios ion-thumbnail img,
+.item-md ion-thumbnail ion-img,
+.item-md ion-thumbnail img {
+  width: 80px;
+  height: auto;
 }
 
 .centerLink {
@@ -23382,81 +23397,26 @@ page-checkout .cc-flags img,
   display: inline-block;
 }
 
-.dish .card {
-  width: auto;
-  border-radius: 0;
-  margin: 0;
-}
-
-.dish ion-card img {
-  max-height: inherit !important;
-}
-
-.dish .dish-card ion-card-content {
-  padding: 0;
-  background-color: #cd1e37;
-  color: #fff;
-  text-align: center;
-  -webkit-box-shadow: inset 0 0 8rem rgba(0, 0, 0, 0.4);
-  box-shadow: inset 0 0 8rem rgba(0, 0, 0, 0.4);
-}
-
-.dish .dish-card ion-card-content img {
-  border-bottom: solid 4px #111111;
-  display: inline;
-}
-
-.dish .dish-card ion-card-content h2 {
-  font-size: 2.45rem;
-  margin-top: .5rem;
-  color: #fff;
-}
-
-.dish .dish-card ion-card-content h3 {
-  font-size: 1.5rem;
-  color: #fff;
-}
-
-.dish .dish-card ion-card-content .picture-frame {
-  width: 100%;
-  height: 250px;
-  overflow: hidden;
-  position: relative;
-}
-
-.dish .dish-card ion-card-content.card-content-md .picture-frame {
-  height: 400px;
-}
-
-.dish .dish-card ion-card-content .price {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  padding: 10px;
-  font-weight: bold;
-}
-
-.dish .dish-card ion-card-content .circle {
-  font-size: 2em;
-  margin-top: 0.5em;
-}
-
-.dish .swiper-slide img {
-  min-width: 100%;
-}
-
 page-home .imageFrame {
   width: 100%;
   height: 200px;
   overflow: hidden;
+  position: relative;
 }
 
 page-home .imageFrame img {
   width: 100%;
   max-height: inherit;
   margin-top: -20%;
+}
+
+page-home .imageFrame .stadiumTitle {
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 page-home .seat {
@@ -23536,6 +23496,75 @@ page-home .segment-ios .segment-button {
 
 page-home .segment-ios-light .segment-button.segment-activated {
   color: #96071a;
+}
+
+.item .card {
+  width: auto;
+  border-radius: 0;
+  margin: 0;
+}
+
+.item ion-card img {
+  max-height: inherit !important;
+}
+
+.item ion-item.item-checkbox {
+  background: pink;
+}
+
+.item .item-card ion-card-content {
+  padding: 0;
+  background-color: #cd1e37;
+  color: #fff;
+  text-align: center;
+  -webkit-box-shadow: inset 0 0 8rem rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 0 8rem rgba(0, 0, 0, 0.4);
+}
+
+.item .item-card ion-card-content img {
+  border-bottom: solid 4px #111111;
+  display: inline;
+}
+
+.item .item-card ion-card-content h2 {
+  font-size: 2.45rem;
+  margin-top: .5rem;
+  color: #fff;
+}
+
+.item .item-card ion-card-content h3 {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.item .item-card ion-card-content .picture-frame {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.item .item-card ion-card-content.card-content-md .picture-frame {
+  height: 400px;
+}
+
+.item .item-card ion-card-content .price {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.item .item-card ion-card-content .circle {
+  font-size: 2em;
+  margin-top: 0.5em;
+}
+
+.item .swiper-slide img {
+  min-width: 100%;
 }
 
 .message-header {

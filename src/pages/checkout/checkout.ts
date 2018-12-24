@@ -29,7 +29,7 @@ export class CheckoutPage {
     this.checkoutData = this.navParams.data.orders;
 
   	this.checkoutData.forEach((val, i) => {
-  		this.totalVal = this.totalVal + (val.order.price * val.qtd)
+  		this.totalVal = this.totalVal + (val.details.price * val.qtd)
   	});
 
   	this.storage.set('order-' + this.orderNumber, this.checkoutData);
@@ -66,18 +66,19 @@ export class CheckoutPage {
       var today = new Date();
       var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
       var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      var dateTime = time+' ('+date+')';
+      var dateTime = time+'<br>('+date+')';
 
       this.afd.list('restaurants/'+ sessionStorage.getItem('restaurant') +'/orders')
       .update(
         JSON.stringify(this.orderNumber), 
           {
             'orderID': this.orderNumber,
-            'orderTime': dateTime,
+            'orderTime': time + '<br>(' + date + ')',
             'seatNum':  sessionStorage.getItem('seatLocation'),
             'total': this.totalVal,
             'items': this.navParams.data.orders,
-            'status': 'Ordered'
+            'status': 'Ordered',
+            'token': localStorage.getItem('token')
           }
         );
       // back to home page

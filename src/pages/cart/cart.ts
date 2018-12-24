@@ -11,8 +11,11 @@ import { Storage } from '@ionic/storage';
 
 export class CartPage {
 
-	orders: Array<any> = [];
-	totalVal: number = 0;
+    orders: Array<any> = [];
+    extras: Array<any> = [];
+    totalVal: number = 0;
+    extrasum: number;
+    options: any;
 
   constructor(
       public navCtrl: NavController, 
@@ -30,13 +33,22 @@ export class CartPage {
         .catch(error => alert(JSON.stringify(error)));
   }
 
-  getOrders () {
-    this.cartService.getOrders().then(orders => {
-        this.orders = orders;
-        this.storage.set('orders',this.orders)
-    	this.totalVal = 0;
+  getSum(total, num) {
+    return total + num;
+  }
+
+  getOrders() {
+    this.cartService.getOrders().then(details => {
+        this.orders = details;
+        this.storage.set('orders',this.orders);
+        this.totalVal = 0;
+        this.extras;
     	this.orders.forEach((val, i) => {
-    		this.totalVal = this.totalVal + (val.order.price * val.qtd)
+            this.extras.push(val.details.extrasum);
+            this.extrasum = this.extras.reduce(this.getSum);
+            console.log(val.details);
+            this.options = val.details.selectedOptions;
+            this.totalVal = this.totalVal + (val.details.price * val.qtd);
     	});
     });
   }

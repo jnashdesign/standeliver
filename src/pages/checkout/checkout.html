@@ -16,12 +16,12 @@
         <div ion-item *ngFor="let order of checkoutData">
         	<!-- (click)="itemTapped(favorite)" -->
             <ion-thumbnail item-left>
-                <img src="{{order.order.picture}}"/>
+                <img src="{{order.details.picture}}"/>
             </ion-thumbnail>
-              <h2 ion-text color="dark" class="fw700">{{order.order.name}}</h2>
-							<p ion-text color="primary">{{order.order.ingredients}}</p>
+              <h2 ion-text color="dark" class="fw700">{{order.details.name}}</h2>
+							<p ion-text color="primary">{{order.details.ingredients}}</p>
             <div item-right>
-							<ion-badge>{{ order.order.price * order.qtd | currency:'USD':true }}</ion-badge>
+							<ion-badge>{{ order.details.price * order.qtd + 2 | currency:'USD':true }}</ion-badge>
             </div>
         </div>
 		  </ion-list>
@@ -33,7 +33,7 @@
           <ion-card class="green-bg" no-margin text-center>
             <ion-card-content>
               <span ion-text class="text-white">Total</span>
-              <h2 ion-text no-margin class="fw700 text-white">{{ totalVal | currency:'USD':true }}</h2>
+              <h2 ion-text no-margin class="fw700 text-white">{{ totalVal + 2 | currency:'USD':true }}</h2>
             </ion-card-content>
           </ion-card>
         </ion-col>
