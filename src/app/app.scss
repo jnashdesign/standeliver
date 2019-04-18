@@ -51,6 +51,13 @@ ion-app, ion-nav, ion-tab, ion-tabs, .app-root {
   height: auto;
 }
 
+.item-ios .item-button.setLocationBtn,
+.item-md .item-button.setLocationBtn {
+	padding: 0 2em;
+	height: 44px;
+	font-size: 1.7rem;
+	}
+
 .centerLink {
 	text-align: center;
 	text-decoration: underline;

@@ -44,11 +44,11 @@ export class HomePage {
     if(sessionStorage.getItem('currentLocation') == null){
       // do nothing
     }else{
-      if (sessionStorage.getItem('currentLocation') == 'Kincaid Stadium'){
+      if (sessionStorage.getItem('currentLocation') == 'Kincaide Stadium'){
         this.stadiumIMG = 'assets/img/kincaid.jpg';
         this.stadium = sessionStorage.getItem('currentLocation')
       } else {
-        this.stadiumIMG = 'assets/img/Forester-Athletic-Complex.jpg';
+        this.stadiumIMG = 'assets/img/DavisFieldHouse.jpg';
         this.stadium = sessionStorage.getItem('currentLocation')
       }
     }
@@ -139,16 +139,16 @@ export class HomePage {
       message: "Choose stadium to see available concession stands.",
       buttons: [
         {
-          text: 'Kincaid Stadium',
+          text: 'Kincaide Stadium',
           handler: data => {
             console.log('Change clicked', data);
-            sessionStorage.setItem('currentLocation','Kincaid Stadium');
+            sessionStorage.setItem('currentLocation','Kincaide Stadium');
             document.getElementById('restaurants').style.display='block';
             document.getElementById('stadium').style.display='block';
             this.stadiumIMG = 'assets/img/kincaid.jpg';
-            this.stadium = 'Kincaid Stadium';
+            this.stadium = 'Kincaide Stadium';
             let toast = this.toastCtrl.create({
-              message: 'Concessions for Kincaid Stadium now available.',
+              message: 'Concessions for Kincaide Stadium now available.',
               duration: 3000,
               position: 'top',
               closeButtonText: 'OK',
@@ -158,16 +158,16 @@ export class HomePage {
           }
         },
         {
-          text: 'Forester Athletic Complex',
+          text: 'Davis Field House',
           handler: data => {
             console.log('Change clicked', data);
-            sessionStorage.setItem('currentLocation','Forester Athletic Complex');
+            sessionStorage.setItem('currentLocation','Davis Field House');
             document.getElementById('restaurants').style.display='block';
             document.getElementById('stadium').style.display='block';
-            this.stadiumIMG = 'assets/img/Forester-Athletic-Complex.jpg';
-            this.stadium = 'Forester Athletic Complex';
+            this.stadiumIMG = 'assets/img/DavisFieldHouse.jpg';
+            this.stadium = 'Davis Field House';
             let toast = this.toastCtrl.create({
-              message: 'Concessions for Forester Athletic Complex now available.',
+              message: 'Concessions for Davis Field House now available.',
               duration: 3000,
               position: 'top',
               closeButtonText: 'OK',

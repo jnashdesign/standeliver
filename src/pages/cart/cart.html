@@ -9,15 +9,14 @@
     </ion-navbar>
 </ion-header>
 
-
 <ion-content class="lightest-bg">
   <ion-card *ngIf="!orders.length" class="primary-bg" margin-top>
     <ion-card-content>
-    	<p text-center class="text-white">You still haven't any item.</p>
+    	<p text-center class="text-white">Your cart is empty.</p>
     </ion-card-content>
   </ion-card>
 
-  <ion-list no-margin>
+  <ion-list no-margin id="itemList">
     <ion-item-sliding *ngFor="let order of orders">
         <div ion-item>
         	<!-- (click)="itemTapped(favorite)" -->
@@ -25,8 +24,9 @@
                 <img src="{{order.details.picture}}"/>
             </ion-thumbnail>
               <h2 ion-text color="dark" class="fw700">{{order.details.name}}</h2>
-              <p *ngIf="order.options" ion-text color="dark">
-                <span *ngFor="let option of order.options; let isLast=last">
+              <p *ngIf="order.details" ion-text color="dark">
+                <strong style="font-size: 0.8em;">Customized: </strong><br/>
+                <span *ngFor="let option of order.details.selectedOptions; let isLast=last">
                     {{option}}{{isLast ? '' : ', '}}</span>
               </p>
 				      <ion-grid class="filters" no-padding>
@@ -46,6 +46,10 @@
 				        </ion-row>
 				      </ion-grid>
             <div item-right>
+                <h2 ion-text color="primary" class="text-18x" (click)="editOrder(order)">
+                    Edit<br/>
+                    ({{order.itemId}})
+                  </h2>
 							<ion-badge>{{ order.details.price * order.qtd | currency:'USD':true }}</ion-badge>
             </div>
         </div>

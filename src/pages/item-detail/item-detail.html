@@ -1,7 +1,8 @@
 <ion-header>
     <ion-navbar color="primary">
         <ion-title>
-            <span ion-text>{{item.name}}</span>
+						<span ion-text>{{item.name}}</span>
+						<span ion-text>{{item.itemId}}</span>
         </ion-title>
     </ion-navbar>
 </ion-header>
@@ -31,12 +32,22 @@
 	          <ion-col width-10 text-center>
 	            <ion-icon name="add-circle" class="circle" tappable (click)="plusQtd()" color="secondary"></ion-icon>
 						</ion-col>
-						<ion-col>
-								<button ion-button color="secondary" icon-left tappable (click)="addcart(item, qtd)">
+						<div *ngIf="item.itemId == null; else update">
+							<ion-col>
+								<button ion-button id="addtoCart" color="secondary" icon-left tappable (click)="addcart(item, qtd)">
 										<!-- Add to Cart ({{ item.price * qtd | currency:'USD':true }}) -->
 										Add to Cart
 									</button>
-						</ion-col>
+								</ion-col>
+						</div>
+						<ng-template #update>
+							<ion-col>
+								<button ion-button id="updateCart" color="secondary" icon-left tappable (click)="updatecart(item, qtd)">
+									<!-- Add to Cart ({{ item.price * qtd | currency:'USD':true }}) -->
+									Update Item
+							</button>
+							</ion-col>
+						</ng-template>
 					</ion-row>
 					<div *ngIf="item.name == 'Drinks' || item.name == 'Candy'">
 						<ion-list *ngFor="let option of options" radio-group [(ngModel)]="drinks">
@@ -51,10 +62,10 @@
 					<ion-row margin-bottom id="options" style="display:none;">
 							<ion-col text-center>
 								<ion-list *ngFor="let option of options">
-										<ion-item>
+										<ion-item class="checked">
 												<ion-label>{{option.name}} (+ ${{option.price.toFixed(2)}})</ion-label>
-												<ion-checkbox color="dark" [(ngModel)]="option.name.checked" (ngModelChange)="addToOrder(item, option.name, option.price)" checked="false"></ion-checkbox>
-											</ion-item>
+													<ion-checkbox color="dark" [(ngModel)]="option.selected" (ngModelChange)="addToOrder(item, option.name, option.price)"></ion-checkbox>
+												</ion-item>
 								</ion-list>
 								</ion-col>
 	        </ion-row>

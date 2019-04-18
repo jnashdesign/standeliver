@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { CheckoutPage } from '../checkout/checkout';
+import { ItemDetailPage } from '../item-detail/item-detail';
 import { CartService } from '../../providers/cart-service-mock';
 import { Storage } from '@ionic/storage';
 
@@ -73,6 +74,10 @@ export class CartPage {
 
   openCheckout() {
       this.navCtrl.push(CheckoutPage, {orders: this.orders});
+  }
+
+  editOrder(item){
+    this.navCtrl.push(ItemDetailPage, item.details);
   }
 
 }

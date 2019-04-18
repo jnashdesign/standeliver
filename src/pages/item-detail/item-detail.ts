@@ -26,6 +26,7 @@ export class ItemDetailPage {
     public storage: Storage,
     public cartService: CartService) {
     this.item = this.navParams.data;
+    console.log(this.item);
     if (this.item.options){
       this.options = this.item.options;
       this.item.extrasum = 0;

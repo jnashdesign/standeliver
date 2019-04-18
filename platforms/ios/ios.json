@@ -62,45 +62,30 @@
             }
           ]
         }
-      },
-      "*-Info.plist": {
-        "parents": {
-          "UIBackgroundModes": []
-        }
-      },
-      "*-Debug.plist": {
-        "parents": {
-          "aps-environment": []
-        }
-      },
-      "*-Release.plist": {
-        "parents": {
-          "aps-environment": []
-        }
       }
     }
   },
   "installed_plugins": {
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "com.standeliver.Prototype"
+      "PACKAGE_NAME": "com.standeliver.app"
     },
     "cordova-plugin-firebase": {
-      "PACKAGE_NAME": "com.standeliver.Prototype"
+      "PACKAGE_NAME": "com.standeliver.app"
     },
     "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "com.standeliver.Prototype"
+      "PACKAGE_NAME": "com.standeliver.app"
     },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.standeliver.Prototype"
+      "PACKAGE_NAME": "com.standeliver.app"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "com.standeliver.Prototype"
+      "PACKAGE_NAME": "com.standeliver.app"
     },
     "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "com.standeliver.Prototype"
+      "PACKAGE_NAME": "com.standeliver.app"
     },
     "ionic-plugin-keyboard": {
-      "PACKAGE_NAME": "com.standeliver.Prototype"
+      "PACKAGE_NAME": "com.standeliver.app"
     }
   },
   "dependent_plugins": {},

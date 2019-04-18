@@ -68,9 +68,9 @@ export class CheckoutPage {
       var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
       var dateTime = time+'<br>('+date+')';
 
+      console.log(this.navParams);
       this.afd.list('restaurants/'+ sessionStorage.getItem('restaurant') +'/orders')
-      .update(
-        JSON.stringify(this.orderNumber), 
+      .update(JSON.stringify(this.orderNumber), 
           {
             'orderID': this.orderNumber,
             'orderTime': time + '<br>(' + date + ')',
@@ -83,7 +83,7 @@ export class CheckoutPage {
         );
       // back to home page
       this.nav.setRoot(HomePage);
-    }, 3000)
+    }, 500)
   }
 }
 
