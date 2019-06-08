@@ -39,18 +39,21 @@ export class CartPage {
   }
 
   getOrders() {
-    this.cartService.getOrders().then(details => {
-        this.orders = details;
-        this.storage.set('orders',this.orders);
-        this.totalVal = 0;
-        this.extras;
-    	this.orders.forEach((val, i) => {
-            this.extras.push(val.details.extrasum);
-            this.extrasum = this.extras.reduce(this.getSum);
-            console.log(val.details);
-            this.options = val.details.selectedOptions;
-            this.totalVal = this.totalVal + (val.details.price * val.qtd);
-    	});
+    this.storage.get('orders')
+        .then((data)=>{
+          if (data){
+            this.orders = data;
+            console.log(this.orders);
+            this.totalVal = 0;
+            this.extras;
+            this.orders.forEach((val, i) => {
+                this.extras.push(val.details.extrasum);
+                this.extrasum = this.extras.reduce(this.getSum);
+                console.log(val.details);
+                this.options = val.details.selectedOptions;
+                this.totalVal = this.totalVal + (val.details.price * val.qtd);
+          });
+        }
     });
   }
 

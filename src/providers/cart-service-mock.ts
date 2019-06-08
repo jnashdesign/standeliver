@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import{Storage} from '@ionic/storage';
 
 @Injectable()
 export class CartService {
@@ -7,24 +8,26 @@ export class CartService {
   orders: Array<any> = [];
   options: any;
 
+  constructor(
+    public storage: Storage) {
+}
+
   addtoCart(item, qtd) {
     this.orderCounter = this.orderCounter + 1;
     item.id = Math.floor(Math.random() * 1000);
 
     this.orders.push({
-        id: this.orderCounter, 
+        id: this.orderCounter,
         details: item,
         extras: item.extrasum,
         options: item.selectedOptions,
-        qtd: qtd, 
+        qtd: qtd,
         restaurant: sessionStorage.getItem('restaurant')
       });
 
-    return Promise.resolve();
-  }
+    this.storage.set('orders',this.orders);
 
-  getOrders() {
-    return Promise.resolve(this.orders);
+    return Promise.resolve();
   }
 
   removefromCart(order) {
@@ -36,25 +39,30 @@ export class CartService {
   }
 
   editQtdOrder(order, op) {
-  	// let order = this.orders[id - 1]
-		// let index = this.orders.indexOf(order);
-		// let order;
-  //   if (index > -1) {
-  //     this.orders[index];
-  //   }
+    this.storage.get('orders')
+        .then((orders)=>{
+          if (orders){
+          let index = orders.indexOf(order);
+          console.log(orders);
+          if (index > -1) {
+            this.orders[index];
+          }
+      
+          for (let i in this.orders) {
+            if (this.orders[i].id === order.id) {
+              if (op === 'minus') {
+                this.orders[i].qtd--;
+                break;
+              }
+              if (op === 'plus') {
+                this.orders[i].qtd++;
+                break;
+              }
+            }
+          }
+        }
+    })
 
-		for (let i in this.orders) {
-			if (this.orders[i].id === order.id) {
-				if (op === 'minus') {
-					this.orders[i].qtd--;
-		    	break;
-				}
-				if (op === 'plus') {
-					this.orders[i].qtd++;
-		    	break;
-				}
-			}
-		}
 		return Promise.resolve();
   }
 

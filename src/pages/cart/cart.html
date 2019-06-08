@@ -48,7 +48,7 @@
             <div item-right>
                 <h2 ion-text color="primary" class="text-18x" (click)="editOrder(order)">
                     Edit<br/>
-                    ({{order.itemId}})
+                    ({{order.id}})
                   </h2>
 							<ion-badge>{{ order.details.price * order.qtd | currency:'USD':true }}</ion-badge>
             </div>
